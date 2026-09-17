@@ -61,16 +61,16 @@ def get_doc_from_page(
 
     sections = [
         TextSection(
+            link=page.full_url(),
+            text=sections_extracted.header,
+        )
+    ]
+    sections.extend(
+        TextSection(
             link=f"{page.full_url()}#" + section.heading.replace(" ", "_"),
             text=section.title + section.content,
         )
         for section in sections_extracted.sections
-    ]
-    sections.append(
-        TextSection(
-            link=page.full_url(),
-            text=sections_extracted.header,
-        )
     )
 
     return Document(
